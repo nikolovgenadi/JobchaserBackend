@@ -1,3 +1,4 @@
+// filepath: c:\Users\Imgen\Documents\GitHub\Jobchaser3\src\components\navbar.tsx
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
@@ -15,15 +16,11 @@ function NavbarComponent({ searchQuery, setSearchQuery }: NavbarProps) {
   return (
     <nav className={styles.navbar}>
       <Link to="/" className={styles.brand}>
-        Job List
+        Job Chaser
       </Link>
       <div className={styles.navLinks}>
-        <Link to="/login" className={styles.navLink}>
-          Login
-        </Link>
-        <Link to="/signup" className={styles.navLink}>
-          Signup
-        </Link>
+        <Link to="/login" className={styles.navLink}>Login</Link>
+        <Link to="/signup" className={styles.navLink}>Signup</Link>
       </div>
       <form className={styles.searchForm}>
         <input

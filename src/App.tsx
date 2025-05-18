@@ -2,6 +2,9 @@ import React from "react";
 import { useState } from "react";
 import List from "./components/list";
 import NavbarComponent from "./components/navbar";
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,7 +16,11 @@ function App() {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
-      <List searchQuery={searchQuery} />
+      <Routes>
+        <Route path="/" element={<List searchQuery={searchQuery} />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
     </div>
   );
 }
