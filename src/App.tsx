@@ -5,6 +5,7 @@ import NavbarComponent from "./components/navbar";
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import "./main.css";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");

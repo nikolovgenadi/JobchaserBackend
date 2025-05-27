@@ -15,7 +15,7 @@ function NavbarComponent({ searchQuery, setSearchQuery }: NavbarProps) {
   return (
     <nav className={styles.navbar}>
       <Link to="/" className={styles.brand}>
-        Job List
+        Job Listings
       </Link>
       <div className={styles.navLinks}>
         <Link to="/login" className={styles.navLink}>
