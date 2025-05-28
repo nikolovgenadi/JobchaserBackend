@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import useFetchData from "./useFetchData";
 import ListItem from "./ListItem";
 import styles from "./list.module.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 interface ListProps {
   searchQuery: string;
@@ -11,12 +13,19 @@ function List({ searchQuery }: ListProps): JSX.Element {
   const { jobs, isLoading, error } = useFetchData();
   const [openJobId, setOpenJobId] = useState<number | null>(null);
 
-  const filteredJobs = jobs.filter((i) =>
-    i.position.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const { levels, roles } = useSelector((state: RootState) => state.filters);
+
+  const filteredJobs = jobs.filter((i) => {
+    const matchesSearch = i.position
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesLevel = levels.length === 0 || levels.includes(i.level);
+    const matchesRole = roles.length === 0 || roles.includes(i.role);
+    return matchesSearch && matchesLevel && matchesRole;
+  });
 
   const handleToggle = (jobId: number) => {
-    setOpenJobId(openJobId === jobId ? null : jobId); 
+    setOpenJobId(openJobId === jobId ? null : jobId);
   };
 
   return (

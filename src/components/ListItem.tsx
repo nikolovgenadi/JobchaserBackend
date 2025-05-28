@@ -5,8 +5,8 @@ import styles from "./ListItem.module.css";
 interface ListItemProps {
   item: Job;
   searchQuery: string;
-  isOpen: boolean; // Whether this job is open
-  onToggle: () => void; // Function to toggle this job
+  isOpen: boolean; 
+  onToggle: () => void; 
 }
 
 function ListItem({

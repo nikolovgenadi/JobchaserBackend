@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import fetchData from "./fetchData";
 import { Job } from "../interfaces";
