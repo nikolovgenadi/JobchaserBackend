@@ -1,50 +1,20 @@
-# React + TypeScript + Vite
+Vad är Redux Toolkit?
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+En verktyg som förenklar arbetet med global state i React t.ex. man fpr färdiga funktioner att använda för api anrop, store och reducers för state ändring.
 
-Currently, two official plugins are available:
+När, i vilka situationer vill man använda Redux Toolkit?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+När man använder global shared state, man vill skapa någon typ av sortering, sökfilter eller kategorier som ska kunna anvnädas ut av flera komponenter. Vid också mycket api data som ska delas och uppdateras i flera delar av appen eller för att spara användarinfo, inloggningar och dark-mode i hela appen.
 
-## Expanding the ESLint configuration
+Beskriv typiska områden hur man använder Typescript i React? (ex props, event, useReducer, etc)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Man avnäder typer för att berätta vilka värden som komponenten ska förvänta sig som i t.ex props/interface från projektet:
+här ska den förvänta sig att search query är en string och setSearchQuery funktion som tar emot string
+interface NavbarProps {
+searchQuery: string;
+setSearchQuery: (value: string) => void;
+}
+När vi använder t.ex. useState där vi kanske har ett null initialvärde pga TS kan inte alltid lista typen när initialvärdet är null.
+usereducer använder vi när man har t.ex. "union" av actions där man vill ha ett säkert flöde med endast de tillåtna actions, man får direkt återkoppling om man missad case eller använder fel typ.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+I stort sätt är hela typescript med anledningen att få rätt typ och få direkt återkoppling i kodskrivaren för att undvika buggar pga fel data typer.
