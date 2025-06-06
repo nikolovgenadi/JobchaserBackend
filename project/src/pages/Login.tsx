@@ -17,22 +17,27 @@ function Login() {
   const [loginError, setLoginError] = useState("");
   const [userEmail, setUserEmail] = useState<string | null>(null);
 
-  const onSubmit = (data: LoginInputs) => {
-    const savedUser = localStorage.getItem("jobchaser-user");
-    if (savedUser) {
-      const user = JSON.parse(savedUser);
-      if (user.email === data.email && user.password === data.password) {
-        login();
-        setUserEmail(user.email);
-        setLoginError("");
-        localStorage.setItem("jobchaser-loggedin", "true");
-      } else {
-        setLoginError("Invalid email or password.");
-      }
+  const onSubmit = async (data: LoginInputs) => {
+  try {
+    const res = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json();
+    if (res.ok && result.token) {
+      localStorage.setItem("jwt", result.token);
+      login();
+      setUserEmail(result.user.email);
+      setLoginError("");
     } else {
-      setLoginError("No user found. Please sign up first.");
+      setLoginError("Invalid email or password.");
     }
-  };
+  } catch (err) {
+    setLoginError("Login failed.");
+    console.error("Error during login:", err);
+  }
+};
 
   React.useEffect(() => {
     if (isLoggedIn) {

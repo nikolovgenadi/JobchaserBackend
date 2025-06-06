@@ -6,6 +6,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import "./main.css";
 import FilterCheckboxes from "./redux/filterCheckboxes";
+import Watchlist from "./pages/Watchlist";
+
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -22,6 +24,7 @@ function App() {
         <Route path="/" element={<List searchQuery={searchQuery} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/watchlist" element={<Watchlist />} />
       </Routes>
     </div>
   );

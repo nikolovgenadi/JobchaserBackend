@@ -5,16 +5,33 @@ import styles from "./ListItem.module.css";
 interface ListItemProps {
   item: Job;
   searchQuery: string;
-  isOpen: boolean; 
-  onToggle: () => void; 
+  isOpen: boolean;
+  onToggle: () => void;
 }
 
-function ListItem({
-  item,
-  // searchQuery,
-  isOpen,
-  onToggle,
-}: ListItemProps): JSX.Element {
+function ListItem({ item, isOpen, onToggle }: ListItemProps): JSX.Element {
+  const handleSave = async () => {
+    const token = localStorage.getItem("jwt");
+    if (!token) {
+      alert("You must be logged in to save jobs.");
+      return;
+    }
+    const res = await fetch("http://localhost:5000/api/jobs/watchlist", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    });
+    if (res.status === 409) {
+      alert("This job is already in your watchlist!");
+    } else if (res.ok) {
+      alert("Job saved to your watchlist!");
+    } else {
+      alert("Failed to save job.");
+    }
+  };
   return (
     <div className={styles.accordion}>
       <div className={styles.accordionItem}>
@@ -38,10 +55,13 @@ function ListItem({
             <p>Company: {item.company}</p>
             <p>Location: {item.location}</p>
             <p>Posted: {item.postedAt}</p>
-            <p>Tools: {item.tools}</p>
+            <p>Tools: {item.tools.join(", ")}</p>
             {item.languages.map((lang, index) => (
               <p key={`${lang.name}-${index}`}>{lang.name}</p>
             ))}
+            <button onClick={handleSave} className={styles.saveButton}>
+              Save to Watchlist
+            </button>
           </div>
         </div>
       </div>

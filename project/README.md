@@ -1,20 +1,17 @@
-Vad är Redux Toolkit?
+Instructions for project startup:
 
-En verktyg som förenklar arbetet med global state i React t.ex. man fpr färdiga funktioner att använda för api anrop, store och reducers för state ändring.
+1. Open new terminal in editor
 
-När, i vilka situationer vill man använda Redux Toolkit?
+2. type the following:
+cd project/server
+npm install
+npm run dev
 
-När man använder global shared state, man vill skapa någon typ av sortering, sökfilter eller kategorier som ska kunna anvnädas ut av flera komponenter. Vid också mycket api data som ska delas och uppdateras i flera delar av appen eller för att spara användarinfo, inloggningar och dark-mode i hela appen.
+3. Open a new terminal tab, do NOT close the previous.
 
-Beskriv typiska områden hur man använder Typescript i React? (ex props, event, useReducer, etc)
+4. Type the following:
+cd project
+npm install
+npm run dev
 
-Man avnäder typer för att berätta vilka värden som komponenten ska förvänta sig som i t.ex props/interface från projektet:
-här ska den förvänta sig att search query är en string och setSearchQuery funktion som tar emot string
-interface NavbarProps {
-searchQuery: string;
-setSearchQuery: (value: string) => void;
-}
-När vi använder t.ex. useState där vi kanske har ett null initialvärde pga TS kan inte alltid lista typen när initialvärdet är null.
-usereducer använder vi när man har t.ex. "union" av actions där man vill ha ett säkert flöde med endast de tillåtna actions, man får direkt återkoppling om man missad case eller använder fel typ.
-
-I stort sätt är hela typescript med anledningen att få rätt typ och få direkt återkoppling i kodskrivaren för att undvika buggar pga fel data typer.
+5. You should be able to visit the website on the following link "http://localhost:5173" or use the link that was shown in your terminal after step 4 was completed.

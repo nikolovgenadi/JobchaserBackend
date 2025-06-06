@@ -24,6 +24,9 @@ function NavbarComponent({ searchQuery, setSearchQuery }: NavbarProps) {
         <Link to="/signup" className={styles.navLink}>
           Signup
         </Link>
+        <Link to="/watchlist" className={styles.navLink}>
+          Watchlist
+        </Link>
       </div>
       <form className={styles.searchForm}>
         <input

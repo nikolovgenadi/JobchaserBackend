@@ -16,11 +16,23 @@ function Signup() {
   const { login } = useAuth();
   const [registered, setRegistered] = useState(false);
 
-  const onSubmit = (data: SignupInputs) => {
-    localStorage.setItem("jobchaser-user", JSON.stringify(data));
-    login();
+  const onSubmit = async (data: SignupInputs) => {
+  try {
+    const res = await fetch("http://localhost:5000/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: data.email.split("@")[0], 
+        email: data.email,
+        password: data.password,
+      }),
+    });
+    if (!res.ok) throw new Error("Registration failed");
     setRegistered(true);
-  };
+  } catch (err) {
+    console.log("Error during registration:", err);
+  }
+};
 
   return (
     <div className="max-w-sm mx-auto mt-10 p-6 border border-blue-200 rounded-lg bg-blue-50 shadow">

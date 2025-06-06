@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import fetchData from "./fetchData";
 import { Job } from "../interfaces";
 
 const useFetchData = (): {
@@ -13,7 +12,8 @@ const useFetchData = (): {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchData()
+    fetch("http://localhost:5000/api/jobs")
+      .then((res) => res.json())
       .then((data) => {
         setIsLoading(false);
         setJobs(data);
